@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis XV Nicole</title>
+  <!-- Importar fuente de Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Slider de imágenes */
+    .slider-container {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slider {
+      height: 100vw;
+      width: 100vh; /*tamaño de la imagen*/
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+
+    /* Texto sobre las imágenes */
+    .hero {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 150%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #D29BFD;
+      text-align: center;
+      z-index: 2; /* Para estar por encima de las imágenes */
+      /*background: rgba(0, 0, 0, 0.3); /* Fondo semitransparente opcional */
+    }
+
+    .hero h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+      letter-spacing: 2px;
+      z-index: 3; /* Asegura que el texto esté por encima del botón */
+    }
+
+    /* Botón con animación */
+    .hero button {
+      margin-top: 20px;
+      padding: 15px;
+      width: 40px;
+      height: 40px;
+      background: url('https://play-lh.googleusercontent.com/8Mc_COljyfll1PGi15TotXnTnb2hprDBwbLxit4uMEwjNk_J_Rjn9kzuxWFgT3lLQ4E=w240-h480-rw') no-repeat center center;
+      background-size: contain;
+      border: none;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+      animation: pulse 1.5s infinite;
+      z-index: 3; /* Para asegurarse de que el botón esté por encima de las imágenes */
+    }
+
+    /* Animaciones */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Reproductor oculto */
+    iframe {
+      display: none;
+    }
+	
+	/* Sección oculta */
+        .hidden-section {
+            
+			display: none;
+  flex-direction: column; /* Apilar los elementos en columna */
+  justify-content: center; /* Centrar verticalmente */
+  align-items: center; /* Centrar horizontalmente */
+  min-height: 100vh; /* Altura completa de la ventana */
+  text-align: center; /* Centrar el texto */
+
+			/*background: url('https://i.pinimg.com/736x/50/c3/b3/50c3b3011386e62bf022d44c5315877a.jpg') center center;*/
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Reloj */
+        #countdown {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .flower-background {
+            background-image: url('fondo-flores.jpg'); /* Cambia la URL por la imagen de las flores */
+            background-size: contain;
+            background-position: center;
+            border-radius: 20px;
+            padding: 20px;
+            display: inline-block;
+        }
+
+        /* Botón de confirmación */
+        .confirm-button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #be7fde;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .confirm-button:hover {
+            background-color: #520579;
+        }
+
+        /* Lista de regalos */
+        .gift-list {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .gift-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .gift-list li {
+            background-color: #520579;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 10px;
+        }
+		
+		/* Cuadro de texto con mensaje */
+.message-box {
+  background: white;
+  background-size: cover;
+  padding: 20px;
+  border-radius: 15px; /* Esquinas redondeadas */
+  margin-bottom: 20px; /* Espacio debajo del cuadro */
+  color: #B57EDC;
+  font-size: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.section-separator {
+      margin: 20px 0;
+    }
+    .section-separator img {
+      width: auto; /* Ajusta el tamaño del GIF según tus necesidades */
+      height: 50px;
+	  
+    }
+	 .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: url('https://i.pinimg.com/736x/50/c3/b3/50c3b3011386e62bf022d44c5315877a.jpg') center center;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+	.countdown-container {
+      position: relative;
+      display: inline-block;
+      width: 300px; /* Ajusta según tus necesidades */
+      height: 300px; /* Ajusta según tus necesidades */
+      background: url('https://i.pinimg.com/550x/0b/29/6e/0b296e2f820cf976c34d41e718659f6a.jpg') no-repeat center center;
+      background-size: cover;
+	  
+    }
+    .countdown {
+      font-size: 2em;
+      /*margin: 20px 0;*/
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /*background: white;*/
+      border-radius: 50%;
+      padding: 20px;
+      font-family: 'Dancing Script', cursive; /* Fuente personalizada */
+    }
+	.map-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: #87CEEB; /* Azul cielo */
+      font-size: 1.2em;
+      margin-top: 10px;
+	  font-family: 'Roboto', sans-serif;
+    }
+	.map-link img {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+    }
+	#img-especifica {
+  max-width: 100%; /* La imagen nunca será más ancha que el contenedor */
+  height: auto;    /* Mantendrá la proporción original */
+  display: block;  /* Elimina el pequeño espacio debajo de las imágenes en línea */
+  
+}
+
+		.courier {
+			font-family: 'Courier New', Courier, monospace;
+			font-style: italic;
+			font-size: 18px;
+			letter-spacing: 2px;
+			line-height: 1.5;
+
+		}
+
+.formal {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .moderno {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+        }
+
+        .decorativo {
+            font-family: 'Lobster', cursive;
+            font-size: 24px;
+            color: #5a5a5a;
+			letter-spacing: 2px;
+        }
+		
+		.brush {
+			font-family: 'Brush Script MT', cursive;
+		}
+		
+		.georgia {
+			font-family: Georgia, serif;
+		}
+		.verdana {
+			font-family: Verdana, Geneva, sans-serif;
+		}
+		.pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+	
+  </style>
+</head>
+<body>
+
+  <!-- Pantalla de inicio con el slider -->
+  <div class="slider-container">
+    <!-- Slider de imágenes rotativas -->
+    <div class="slider">
+      <div class="slide active">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczOknPqLScRZjsRPDT-0ufw-k-gfSVhwvR6tetXnv8N2TOFGvCSvI1PSCfIwS2RigNDdttxgha7Knt7NbUlPBTo3Y9EDSefUEQVhK3I8Q_NND6XNUScyW8VX2-r7XjKlXxwN10JC4oXVXfeti5UlneAiUg=w472-h631-s-no-gm?authuser=0" alt="Imagen 1">
+      </div>
+      <div class="slide">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczNnW-GphlzZO20wTffU_NmDNq8dOES1eIiDO_A4mAZeU8D9CpDBrv477dJhXJ8y_Bm-DESR-93pURzfjgtq6s8GnWHUkEuodOFvAtWNJBXikz4es-DLGrBDgSEFnWBDak2M7YZG_mb1RECceeiG2TxLSg=w646-h485-s-no-gm?authuser=0" alt="Imagen 2">
+      </div>
+      <div class="slide">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPc7f2KztNbiPxCoW5ToIT8niTJrwrHGQ2XfUKtHYxlROsxc0M6328U27EDKKsL6S__2ZMR2OTU3LMyoGBrsEe0uGbgvIUHMv2T8aUhXQysXpPo64E6qEadlCcwKHFa5TfabTB8YnR_zCk9DUYeouZlIg=w646-h485-s-no-gm?authuser=0" alt="Imagen 3">
+      </div>
+	  <div class="slide">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczORnxcYs4G-riylumvtnyeHW_-jIu769BmyTieL-w5t20QXXVLOVYp2eCLDEt8Jx7YTOFyp417xohPhWtUsZ-Vgdi3_D2WqgUG_S5u6KSAAcYqWo4ITr5N4sq9DvaS03iFRlSZbC411-lo1yhoGFCRCzA=w631-h631-s-no-gm?authuser=0" alt="Imagen 4">
+      </div>
+	  <div class="slide">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczMZdDMy2zFpSTPusAvGm-cA4F_bV6q-dZf3VGDIXtp3xQwfFLOwPJ7thx87xlwGEirU-0JEmfsBrO5uw25KYL4JZw7izRtLKD2RbJZdSgfEsRMe2OWOjd92RToYmjx_T2iAh1VFhDfskTfyZkThCX0hkQ=w355-h631-s-no-gm?authuser=0" alt="Imagen 5">
+      </div>
+	  <div class="slide">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczOHKLopYc_msY4nphxH0bl1E3iQlgpWRur4X21NpHIpLJcOrhdUko5aLYhBlXoYJL1DYky6X2pWL3M9mbo4_rDenHVwfh-bKUysog86nOkyJ2FnQqvGicT8hOcdeTXcC5TejXFHTQ_-lv_JlSnUEIzxvQ=w473-h631-s-no-gm?authuser=0" alt="Imagen 6">
+      </div>
+	  <div class="slide">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczO7m1dsKxfAYeyCkt5i_-u-YmYOfsU-QjRhbSQa0RpW4v268Lrwpu-K9nJE1-6r1uUXU0vVt_3jzN4DuUzgbb9vQlRD7xkR-kn3eY-hxssyiMpLQ7r983JiUqPed7NTNLzLmcnAD_qLxkV7bqEsAVo0aw=w631-h631-s-no-gm?authuser=0" alt="Imagen 7">
+      </div>
+	  <div class="slide">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczMgwUFfGLs3AiWOmWPrB6H2oWATC9WCSKJLMEbMYBdqgdDsHYzKMBqD-tX2FM1LgjRy-flAnSm_XMx9uDLx5X5dPugT9tFklqLuENsVY8dE7p4bMFASveXxHIWb70chLvyjR9LslLOJpFM7qZb1_C4B4g=w473-h631-s-no-gm?authuser=0" alt="Imagen 8">
+      </div>
+	  <div class="slide">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczNh2IZp33y289i1cDnp7OmINYsGiXfWHiwqq8iGiLsbiwflCAwS_TVTfq4wyxjvy8S4j5f3NGiY0BQBy-ObVYt5892TsoS3u1XsHe9xEBg4IHB3NsluQHjvkTykmAMNXUDrhPkoR2-Sza1c_bCwR8D8CA=w473-h631-s-no-gm?authuser=0" alt="Imagen 9">
+      </div>
+	  <div class="slide">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczO4FNzt0ggHY5sTGojXtHVsmBBDrlq-EKm4ez1JsSh_eq8-7Dmg5qlMvVqoCJD6dJOlDuUBZ6NHaJFataA8ZW2RdYoFZJaV3X32JzV439dpuiMfDFFk0AGcP_AA7nDPakmRsEMoGfxB0zdgNOSdRpsTWg=w473-h631-s-no-gm?authuser=0" alt="Imagen 10">
+      </div>
+	  
+    </div>
+
+    <!-- Texto sobre el slider -->
+    <section class="hero">
+      <h1>MIS XV</h1>
+      <button id="play-button" ></button>
+      <h1>NICOLE</h1>
+    </section>
+  </div>
+
+
+    <!-- Sección oculta -->
+	<div class="container">
+	
+	
+    <div class="hidden-section" id="hidden-section">
+	
+	<!-- Cuadro de texto para el mensaje personal -->
+<div class="message-box">
+  <p class="pacifico-regular">Los espero para compartir la alegría de esté gran día tan esperado para mí e inolvidable.</p>
+<div class="section-separator">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiz8YDZFWhUz6BD-DE_RCMIVq7LKK094cfJWXfk-3uK4mKNatJap60tz5b-Th-d0o4Jc45FY0Jd4tlqVDXJ5f8soQORpcf3SvTxPX6eXN-UjPg4HVPpkmImAcajpC3pK_k1rQnnoj6TtKs/s1600/Gifs+Animados+Mariposas+36.gif" >
+    </div>
+
+      
+      <img id="img-especifica" src="https://lh3.googleusercontent.com/pw/AP1GczOWqwSIgLXdB_lRpGi9ABAPvApPoE0Sk1UudlfIc41vVqfjTxX2f4G-a_GtDW0qmoxzUHBXNMRlEDgSUH-5KGNJBuErmu6JKhZBxn3E6Qi2ZaoE-gmVrZc7IDvVh2WkOof4mJaSk6YpupthwxZGGwa87w=w500-h500-s-no-gm?authuser=0" alt="Separador de corazón">
+	  <div class="section-separator">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiz8YDZFWhUz6BD-DE_RCMIVq7LKK094cfJWXfk-3uK4mKNatJap60tz5b-Th-d0o4Jc45FY0Jd4tlqVDXJ5f8soQORpcf3SvTxPX6eXN-UjPg4HVPpkmImAcajpC3pK_k1rQnnoj6TtKs/s1600/Gifs+Animados+Mariposas+36.gif" alt="Separador de corazón">
+    </div>
+
+
+ 
+ 
+ <h2 style="font-family: 'Cinzel', serif;">FALTAN</h2>
+
+
+<div class="countdown-container">
+			<div class="countdown" id="countdown">00 días 00:00:00</div>
+	    </div>
+ 
+ 
+	<h1 class="decorativo">Mis papás</h1>
+	<div class="section-separator">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiz8YDZFWhUz6BD-DE_RCMIVq7LKK094cfJWXfk-3uK4mKNatJap60tz5b-Th-d0o4Jc45FY0Jd4tlqVDXJ5f8soQORpcf3SvTxPX6eXN-UjPg4HVPpkmImAcajpC3pK_k1rQnnoj6TtKs/s1600/Gifs+Animados+Mariposas+36.gif" alt="Separador de corazón">
+    </div>
+	
+	<p style="font-family: 'Cormorant Garamond', serif;">Jonathan David Cruz Santander</p>
+	<p style="font-family: 'Cormorant Garamond', serif;">Juana Moreno Segundo</p>
+	<div class="section-separator">
+      <img src="https://images.squarespace-cdn.com/content/v1/633097ca33b0e9116c45bfb9/ee5aa473-afee-4d5f-a1d7-268e0952ba0b/ROSE+LILA+SEPARADOR+2.png" alt="Separador de corazón">
+    </div>
+	<h1 class="decorativo">Mis padrinos</h1>
+	<div class="section-separator">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiz8YDZFWhUz6BD-DE_RCMIVq7LKK094cfJWXfk-3uK4mKNatJap60tz5b-Th-d0o4Jc45FY0Jd4tlqVDXJ5f8soQORpcf3SvTxPX6eXN-UjPg4HVPpkmImAcajpC3pK_k1rQnnoj6TtKs/s1600/Gifs+Animados+Mariposas+36.gif" alt="Separador de corazón">
+    </div>
+	
+	<p style="font-family: 'Cormorant Garamond', serif;">Margarito Garduño</p>
+	<p style="font-family: 'Cormorant Garamond', serif;">Cristina Gómez</p>
+
+
+<div class="section-separator">
+      <img src="https://images.squarespace-cdn.com/content/v1/633097ca33b0e9116c45bfb9/ee5aa473-afee-4d5f-a1d7-268e0952ba0b/ROSE+LILA+SEPARADOR+2.png" alt="Separador de corazón">
+    </div>
+
+		
+		<h1 class="courier">¿Dónde?</h1>
+		
+		
+		
+
+		<img style="display: block; margin: 0 auto;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwms680gmBrjeU-gT7fJ6U3yHFocXT2A-KQg&s" alt="Separador de corazón">
+        <p style="font-family: 'Cormorant Garamond', serif;">En la iglesia de San Onofre a la 01:30 p.m. <a href="https://maps.app.goo.gl/JAT8c3kVzPhRPfV58" class="map-link" target="_blank">
+           <img src="https://i.pinimg.com/736x/8c/42/25/8c42257e089f1f737f9803ec2e3f8a49.jpg" alt="Google Maps Icon">
+      
+    </a></p>
+		<div class="section-separator">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiz8YDZFWhUz6BD-DE_RCMIVq7LKK094cfJWXfk-3uK4mKNatJap60tz5b-Th-d0o4Jc45FY0Jd4tlqVDXJ5f8soQORpcf3SvTxPX6eXN-UjPg4HVPpkmImAcajpC3pK_k1rQnnoj6TtKs/s1600/Gifs+Animados+Mariposas+36.gif" alt="Separador de corazón">
+    </div>
+		<h1 class="courier">Posteriormente los esperamos</h1>
+        
+        
+        <p style="font-family: 'Cormorant Garamond', serif;">En casa de la familia Cruz Moreno <a href="https://maps.app.goo.gl/Cafzc5uEuV4JFffn7" class="map-link" target="_blank">
+           <img src="https://i.pinimg.com/736x/8c/42/25/8c42257e089f1f737f9803ec2e3f8a49.jpg" alt="Google Maps Icon">
+      
+    </a></p>
+	<p style="font-family: 'Cormorant Garamond', serif;">04:00 p.m.</p>
+	<div class="section-separator">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiz8YDZFWhUz6BD-DE_RCMIVq7LKK094cfJWXfk-3uK4mKNatJap60tz5b-Th-d0o4Jc45FY0Jd4tlqVDXJ5f8soQORpcf3SvTxPX6eXN-UjPg4HVPpkmImAcajpC3pK_k1rQnnoj6TtKs/s1600/Gifs+Animados+Mariposas+36.gif" alt="Separador de corazón">
+    </div>
+	
+	<h1 class="courier">Inicio del vals</h1>
+	<p style="font-family: 'Cormorant Garamond', serif;">06:00 p.m.</p>
+
+        <!-- Botón de confirmación -->
+        <div style="margin-top: 20px;">
+            <button class="confirm-button" onclick="window.location.href='https://q1rug3o2.forms.app/invitacion-la-fiesta-de-quince-nicole'">Confirmar asistencia</button>
+			
+        </div>
+		
+		<p style="font-family: 'Dancing Script', cursive;">Sabemos que los recuerdos quedan en la memoria de cada uno de nosotros.
+	Pero nos encantaría que el día del evento compartas con nosotros las fotos de ¡Mis quince Nicole!</p> 
+	<a style="font-family: 'Dancing Script', cursive;" href="https://photos.app.goo.gl/dEXdsVR3fsW2YLZt6" target="_blank" class="button">Subir Fotos</a>
+
+        <!-- Mesa de regalos -->
+        
+</div>
+
+
+      
+	
+
+        <!-- SoundCloud iframe -->
+		<script src="https://w.soundcloud.com/player/api.js"></script>
+		<iframe 
+    id="song"
+    width="0" 
+    height="0" 
+    scrolling="no"
+    frameborder="no" 
+    allow="autoplay"
+    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/895489621&color=%2387ceeb&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
+  </iframe>
+       </div>
+
+  </div>
+  
+
+  <script>
+    // Rotación automática de imágenes
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[index].classList.add('active');
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 4000); // Cambia de imagen cada 3 segundos
+
+    // Control de música
+    var iframeElement = document.getElementById('song');
+    var widget = SC.Widget(iframeElement);
+
+    var playButton = document.getElementById('play-button');
+	var section = document.getElementById('hidden-section');
+            
+    
+
+    var isPlaying = false;
+
+    playButton.addEventListener('click', function() {
+        if (isPlaying) {
+            widget.pause();
+            
+        } else {
+            widget.play();
+			section.style.display = 'block'; // Muestra la sección
+            section.scrollIntoView({ behavior: 'smooth' }); // Desplaza suavemente hacia la sección
+            
+        }
+        isPlaying = !isPlaying;
+    });
+
+    widget.bind(SC.Widget.Events.FINISH, function() {
+        isPlaying = false;
+    });
+	
+	// Mostrar sección oculta y desplazarse automáticamente hacia ella
+       
+
+        // Cuenta regresiva
+        var eventDate = new Date("Dec 28, 2024 19:00:00").getTime();
+
+        var countdownFunction = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = eventDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = days + " días " + hours + ":" + minutes + ":" + seconds;
+
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown").innerHTML = "¡El evento ha comenzado!";
+            }
+        }, 1000);
+  </script>
+
+</body>
+</html>
